@@ -26,6 +26,7 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
     dbus-x11 \
     openvpn \
     zip \
+    nano \
   && rm -rf /var/lib/apt/lists/* \
   && yarn global add cypress@$CYPRESS_VERSION
   
