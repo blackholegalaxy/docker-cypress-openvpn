@@ -4,7 +4,7 @@ attempt_counter=0
 max_attempts=20
 
 until ping -c 1 "$1"; do
-    (( attempt_counter == max_attempts )); then
+    if (( attempt_counter == max_attempts )); then
       echo "Max attempts reached"
       exit 1
     fi
