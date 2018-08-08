@@ -1,19 +1,15 @@
 #! /bin/bash
 
-((count = 10))
-while [[ $count -ne 0 ]] ; do
-    ping -c 1 "$1"
-    rc=$?
-    if [[ $rc -eq 0 ]] ; then
-        ((count = 1))
-    fi
-    ((count = count - 1))
-done
+attempt_counter=0
+max_attempts=20
 
-if [[ $rc -eq 0 ]] ; then
-    echo "VPN connected"
-    exit 0
-else
-    echo "VPN Timeout"
-    exit 1
-fi
+until ping -c 1 "$1"; do
+    (( attempt_counter == max_attempts )); then
+      echo "Max attempts reached"
+      exit 1
+    fi
+
+    printf '.'
+    (( ++attempt_counter ))
+    sleep 5
+done
