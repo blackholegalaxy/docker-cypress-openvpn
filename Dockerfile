@@ -9,6 +9,8 @@ ENV TERM xterm
 ENV npm_config_loglevel warn
 ENV npm_config_unsafe_perm true
 
+
+
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
   && echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list \
   && apt-get -qqy update \
@@ -28,7 +30,11 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
     zip \
   && rm -rf /var/lib/apt/lists/* \
   && yarn global add cypress@$CYPRESS_VERSION
+  
+ADD scripts/update-dns.sh /etc/openvpn/update-dns.sh
 
-RUN node -v && npm -v && yarn -v
-RUN google-chrome --version
-RUN cypress --version
+RUN chmod +x /etc/openvpn/update-dns.sh \
+  && node -v \
+  && npm -v \
+  && yarn -v \
+  && google-chrome --version
