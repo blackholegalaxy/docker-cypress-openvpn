@@ -27,8 +27,9 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
     openvpn \
     zip \
     nano \
-  && rm -rf /var/lib/apt/lists/* \
-  && yarn global add cypress@$CYPRESS_VERSION
+  && rm -rf /var/lib/apt/lists/*
+  
+RUN yarn global add cypress@$CYPRESS_VERSION
   
 ADD scripts/update-dns.sh /etc/openvpn/update-dns.sh
 ADD scripts/start-openvpn.sh /etc/openvpn/start-openvpn.sh
@@ -36,8 +37,4 @@ ADD scripts/wait-on-ping.sh /etc/openvpn/wait-on-ping.sh
 
 RUN chmod +x /etc/openvpn/update-dns.sh \
   && chmod +x /etc/openvpn/start-openvpn.sh \
-  && chmod +x /etc/openvpn/wait-on-ping.sh \
-  && node -v \
-  && npm -v \
-  && yarn -v \
-  && google-chrome --version
+  && chmod +x /etc/openvpn/wait-on-ping.sh
