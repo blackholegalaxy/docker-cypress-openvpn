@@ -1,4 +1,4 @@
-FROM blackholegalaxy/cypress:3.1.3
+FROM blackholegalaxy/cypress:3.1.4
 
 LABEL maintainer="blackholegalaxy"
 
